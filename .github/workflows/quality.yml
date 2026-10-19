@@ -24,6 +24,10 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm install
+      - name: Audit production dependencies
+        run: |
+          npm audit --omit=dev --json > /tmp/npm-audit.json || true
+          node -e "const a=require('/tmp/npm-audit.json'); console.log('Production dependency vulnerabilities:', JSON.stringify(a.metadata?.vulnerabilities ?? {})); console.log(JSON.stringify(Object.entries(a.vulnerabilities ?? {}).map(([name, v]) => ({name, severity:v.severity, range:v.range, fixAvailable:v.fixAvailable})), null, 2))"
       - name: Lint
         run: npm run lint
       - name: TypeScript
