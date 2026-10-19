@@ -74,6 +74,8 @@ export default function CustomerRequestsDashboard() {
   }
 
   useEffect(() => {
+    // This effect starts an async Supabase fetch; state updates occur after the request resolves.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void loadRequests();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [configured, router]);
