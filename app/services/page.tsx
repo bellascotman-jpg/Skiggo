@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, MapPin, Search, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, MapPin, Search, ShieldCheck, Sparkles } from "lucide-react";
 import { getServiceCategories } from "@/lib/service-categories";
 import { getPublishedServiceListings } from "@/lib/service-listings";
 
