@@ -5,6 +5,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, Clock3, LoaderCircle, MapPin, MessageSquareQuote, Send, ShieldCheck } from "lucide-react";
 import { createSupabaseBrowserClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import SignOutButton from "@/components/sign-out-button";
 
 type ProviderStatus = "pending" | "verified" | "rejected" | "suspended";
 type Quote = { id: string; request_id: string; status: "pending" | "accepted" | "declined" | "withdrawn"; amount_minor: number; currency: string };
@@ -158,7 +159,7 @@ export default function ProviderRequestsBoard() {
 
   return (
     <main style={{ minHeight: "100vh", background: "#f8fbf8" }}>
-      <header style={{ background: "#fff", borderBottom: "1px solid var(--line)" }}><div className="container" style={{ minHeight: 72, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}><Link href="/" style={{ fontWeight: 900, fontSize: 24 }}>skiggo<span style={{ color: "var(--brand)" }}>.</span></Link><Link href="/provider/services" className="btn btn-outline" style={{ minHeight: 40, paddingInline: 13 }}>My services</Link></div></header>
+      <header style={{ background: "#fff", borderBottom: "1px solid var(--line)" }}><div className="container" style={{ minHeight: 72, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}><Link href="/" style={{ fontWeight: 900, fontSize: 24 }}>skiggo<span style={{ color: "var(--brand)" }}>.</span></Link><div style={{ display: "flex", gap: 8, alignItems: "center" }}><Link href="/provider/services" className="btn btn-outline" style={{ minHeight: 40, paddingInline: 13 }}>My services</Link><SignOutButton/></div></div></header>
       <section className="container" style={{ maxWidth: 1050, padding: "30px 0 65px" }}>
         <Link href="/provider/services" style={{ display: "inline-flex", alignItems: "center", gap: 7, color: "var(--muted)", fontSize: 13, marginBottom: 20 }}><ArrowLeft size={15}/> Professional workspace</Link>
         <div style={{ marginBottom: 24 }}><div className="eyebrow">Find suitable work</div><h1 style={{ fontSize: "clamp(2rem,4vw,3rem)", letterSpacing: "-.055em", margin: "8px 0" }}>Open service requests</h1><p className="muted" style={{ lineHeight: 1.7, margin: 0 }}>Review the job details and send a clear quote when the work fits your skills and availability.</p></div>
