@@ -27,7 +27,7 @@ export default function HomePage() {
     </header>
 
     <section style={{ background: "radial-gradient(ellipse at 82% 20%, #d9f5e5 0%, transparent 42%), linear-gradient(135deg,#f7fbf7,#fff 65%)", padding: "76px 0 66px" }}>
-      <div className="container" style={{ display: "grid", gridTemplateColumns: "minmax(0,1.08fr) minmax(280px,.92fr)", gap: 46, alignItems: "center" }} className="container hero-grid">
+      <div className="container hero-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1.08fr) minmax(280px,.92fr)", gap: 46, alignItems: "center" }}>
         <div><div className="eyebrow" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#e2f6e9", padding: "9px 12px", borderRadius: 30 }}><span style={{ width: 7, height: 7, borderRadius: 8, background: "var(--brand)" }}/> A better way to get things done</div>
           <h1 style={{ fontSize: "clamp(2.65rem,5.6vw,4.7rem)", lineHeight: 1.02, letterSpacing: "-.065em", margin: "22px 0", maxWidth: 650 }}>The right person for the job. <span style={{ color: "var(--brand)" }}>Without the guesswork.</span></h1>
           <p className="muted" style={{ fontSize: 18, lineHeight: 1.75, maxWidth: 560, marginBottom: 28 }}>Find skilled professionals for everyday fixes, home projects and business needs. Compare your options, agree on the work, and move forward with confidence.</p>
