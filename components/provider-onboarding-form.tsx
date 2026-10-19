@@ -172,7 +172,7 @@ export default function ProviderOnboardingForm() {
             <h2 style={{ fontSize: 18, margin: "0 0 10px" }}>Verification comes first</h2>
             <p className="muted" style={{ fontSize: 13, lineHeight: 1.7 }}>Submitting this form does not mark you as verified. Skiggo controls verification separately, and only verified professionals can publish public listings or send quotes.</p>
             {hasProfile && <div style={{ borderTop: "1px solid var(--line)", marginTop: 18, paddingTop: 16 }}><div className="eyebrow">Current status</div><p style={{ margin: "8px 0 0", fontWeight: 800, textTransform: "capitalize" }}>{profile.verification_status.replaceAll("_", " ")}</p></div>}
-            <Link href="/services" style={{ display: "inline-flex", alignItems: "center", gap: 7, color: "var(--brand)", fontWeight: 750, fontSize: 13, marginTop: 20 }}>Browse services <ArrowRight size={15}/></Link>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 15, marginTop: 20 }}><Link href="/provider/services" style={{ display: "inline-flex", alignItems: "center", gap: 7, color: "var(--brand)", fontWeight: 750, fontSize: 13 }}>Manage services <ArrowRight size={15}/></Link><Link href="/provider/requests" style={{ display: "inline-flex", alignItems: "center", gap: 7, color: "var(--brand)", fontWeight: 750, fontSize: 13 }}>Open requests <ArrowRight size={15}/></Link></div>
           </aside>
         </div>
       </section>
