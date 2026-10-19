@@ -152,7 +152,7 @@ export default function ProviderServicesManager() {
 
   return (
     <main style={{ minHeight: "100vh", background: "#f8fbf8" }}>
-      <header style={{ borderBottom: "1px solid var(--line)", background: "#fff" }}><div className="container" style={{ minHeight: 72, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}><Link href="/" style={{ fontWeight: 900, fontSize: 24 }}>skiggo<span style={{ color: "var(--brand)" }}>.</span></Link><Link href="/provider/onboarding" className="btn btn-outline" style={{ minHeight: 40, paddingInline: 13 }}>Professional profile</Link></div></header>
+      <header style={{ borderBottom: "1px solid var(--line)", background: "#fff" }}><div className="container" style={{ minHeight: 72, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}><Link href="/" style={{ fontWeight: 900, fontSize: 24 }}>skiggo<span style={{ color: "var(--brand)" }}>.</span></Link><div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}><Link href="/provider/requests" className="btn btn-primary" style={{ minHeight: 40, paddingInline: 13 }}>Open requests</Link><Link href="/provider/onboarding" className="btn btn-outline" style={{ minHeight: 40, paddingInline: 13 }}>Professional profile</Link></div></div></header>
       <section className="container" style={{ padding: "30px 0 65px", maxWidth: 1100 }}>
         <Link href="/provider/onboarding" style={{ display: "inline-flex", alignItems: "center", gap: 7, fontSize: 13, color: "var(--muted)", marginBottom: 20 }}><ArrowLeft size={15}/> Back to profile</Link>
         <div style={{ display: "flex", alignItems: "start", justifyContent: "space-between", gap: 20, flexWrap: "wrap", marginBottom: 26 }}>
