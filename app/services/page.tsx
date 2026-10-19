@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, MapPin, Search, Sparkles } from "lucide-react";
 import { getServiceCategories } from "@/lib/service-categories";
+import { getPublishedServiceListings } from "@/lib/service-listings";
 
 export const metadata: Metadata = {
   title: "Explore services",
@@ -17,6 +18,7 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
   const categories = await getServiceCategories();
   const query = params.q?.trim() ?? "";
   const location = params.location?.trim() ?? "";
+  const listings = await getPublishedServiceListings(query, location);
   const normalizedQuery = query.toLocaleLowerCase();
   const matchingCategories = normalizedQuery
     ? serviceCategories.filter((category) =>
@@ -101,6 +103,27 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
               <Link href="/services" className="btn btn-primary">Browse all categories <ArrowRight size={16} /></Link>
             </div>
           )}
+
+          <div style={{ marginTop: 44 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "end", gap: 14, flexWrap: "wrap", marginBottom: 18 }}>
+              <div><div className="eyebrow">Verified marketplace listings</div><h2 style={{ fontSize: "clamp(1.6rem,3vw,2.15rem)", letterSpacing: "-.045em", margin: "8px 0" }}>{query || location ? "Matching published services" : "Recently published services"}</h2><p className="muted" style={{ margin: 0, fontSize: 13 }}>{listings.length} {listings.length === 1 ? "service" : "services"} found from live platform records.</p></div>
+              <Link href="/requests/new" className="btn btn-primary" style={{ minHeight: 40, paddingInline: 13 }}>Post a job request <ArrowRight size={15}/></Link>
+            </div>
+            {listings.length ? <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,285px),1fr))", gap: 14 }}>
+              {listings.map((listing) => <article key={listing.id} style={{ border: "1px solid var(--line)", borderRadius: 17, padding: 20, background: "#fff", display: "flex", flexDirection: "column" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "start" }}><span className="eyebrow">{listing.service_categories?.name ?? "Service"}</span><span style={{ display: "inline-flex", alignItems: "center", gap: 5, color: "#17603f", fontSize: 10, fontWeight: 800, background: "#e2f6e9", borderRadius: 20, padding: "5px 8px" }}><ShieldCheck size={12}/> Verified</span></div>
+                <h3 style={{ fontSize: 18, lineHeight: 1.35, margin: "13px 0 8px" }}>{listing.title}</h3>
+                <p className="muted" style={{ fontSize: 13, lineHeight: 1.65, margin: "0 0 14px", whiteSpace: "pre-wrap" }}>{listing.description}</p>
+                <div style={{ fontSize: 17, fontWeight: 900, marginTop: "auto" }}>{listing.pricing_type === "quote" ? "Request a quote" : `${listing.pricing_type === "starting_at" ? "From " : ""}₦${(Number(listing.price_minor ?? 0) / 100).toLocaleString("en-NG", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`}</div>
+                <div className="muted" style={{ fontSize: 12, lineHeight: 1.6, marginTop: 7 }}>By {listing.provider_profiles?.business_name ?? "Verified professional"}{listing.provider_profiles?.service_area_text ? ` · ${listing.provider_profiles.service_area_text}` : ""}</div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, borderTop: "1px solid var(--line)", paddingTop: 13, marginTop: 14 }}><span className="muted" style={{ fontSize: 11 }}>{listing.delivery_mode === "onsite" ? "On-site" : listing.delivery_mode === "remote" ? "Remote" : "On-site or remote"}</span><Link href="/requests/new" style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--brand)", fontSize: 12, fontWeight: 800 }}>Post a request <ArrowRight size={14}/></Link></div>
+              </article>)}
+            </div> : <div style={{ border: "1px solid var(--line)", borderRadius: 17, padding: "26px 22px", background: "#fff" }}>
+              <h3 style={{ margin: "0 0 8px", fontSize: 17 }}>{query || location ? "No published service matches yet" : "No published services yet"}</h3>
+              <p className="muted" style={{ fontSize: 13, lineHeight: 1.7, margin: "0 0 15px" }}>{query || location ? "Try a broader search or post a request so verified professionals can respond when they are available." : "New listings will appear here when professionals complete verification and publish real services. You can still post a job request."}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 9 }}><Link href="/requests/new" className="btn btn-primary" style={{ minHeight: 38, paddingInline: 12 }}>Post a job request <ArrowRight size={15}/></Link><Link href="/auth/sign-up?type=provider" className="btn btn-outline" style={{ minHeight: 38, paddingInline: 12 }}>Join as a professional</Link></div>
+            </div>}
+          </div>
 
           <div style={{ marginTop: 28, border: "1px solid var(--line)", borderRadius: 17, padding: 21, display: "flex", alignItems: "start", gap: 13, background: "#fbfdfb" }}>
             <ShieldCheckIcon />
