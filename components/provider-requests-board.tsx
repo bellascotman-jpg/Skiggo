@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight, BadgeCheck, Clock3, LoaderCircle, MapPin, MessageSquareQuote, Send, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock3, LoaderCircle, MapPin, MessageSquareQuote, Send, ShieldCheck } from "lucide-react";
 import { createSupabaseBrowserClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
 type ProviderStatus = "pending" | "verified" | "rejected" | "suspended";
