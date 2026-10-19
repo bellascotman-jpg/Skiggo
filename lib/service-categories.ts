@@ -49,8 +49,8 @@ type DatabaseCategory = {
 const fallbackBySlug = new Map(serviceCategories.map((category) => [category.slug, category]));
 
 export async function getServiceCategories(): Promise<ServiceCategory[]> {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  const url = SUPABASE_URL;
+  const key = SUPABASE_PUBLISHABLE_KEY;
   if (!url || !key) return serviceCategories;
 
   try {
