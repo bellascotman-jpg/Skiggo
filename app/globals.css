@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:root { --ink: #14251f; --muted: #63736d; --brand: #087f5b; --brand-dark: #075c43; --surface: #f5f8f5; --line: #e0e8e2; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #fff; color: var(--ink); font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+::selection { background: #c9f2dc; color: var(--ink); }
+.container { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+.eyebrow { color: var(--brand); font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.btn { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; gap: 8px; padding: 0 19px; border: 1px solid transparent; border-radius: 10px; font-weight: 700; cursor: pointer; }
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-primary:hover { background: var(--brand-dark); }
+.btn-outline { border-color: var(--line); background: #fff; }
+.section { padding: 76px 0; }
+.muted { color: var(--muted); }
+@media (max-width: 640px) { .container { width: min(100% - 28px, 1160px); } .section { padding: 52px 0; } }
