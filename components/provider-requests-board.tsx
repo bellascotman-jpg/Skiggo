@@ -93,10 +93,13 @@ export default function ProviderRequestsBoard() {
   }, [configured, router]);
 
   function updateDraft(requestId: string, patch: Partial<Draft>) {
-    setDrafts(current => ({
-      ...current,
-      [requestId]: { amount: "", message: "", days: "", ...current[requestId], ...patch },
-    }));
+    setDrafts(current => {
+      const existing = current[requestId] ?? { amount: "", message: "", days: "" };
+      return {
+        ...current,
+        [requestId]: { ...existing, ...patch },
+      };
+    });
   }
 
   async function submitQuote(event: FormEvent<HTMLFormElement>, request: Request) {
