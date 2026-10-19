@@ -2,16 +2,9 @@
 
 **Get It Done.** Skiggo is a Nigeria-first, location-aware services marketplace that helps customers find service professionals, describe a job, receive quotes, and choose who gets it done.
 
-> **Project status:** Active development. The Supabase marketplace foundation is connected and implemented. Deployment and production readiness are being verified; do not treat this project as production-ready until CI passes and the remaining critical workflows are complete.
+> **Status:** Active development. The Supabase marketplace foundation is connected. This repository is under active implementation; do not treat Skiggo as production-ready until automated checks pass and the remaining critical workflows are complete.
 
-## Product goals
-
-- Help customers discover service professionals by category and service area.
-- Let customers post a job request and receive quotes from eligible providers.
-- Give providers onboarding and service-listing tools.
-- Support a trustworthy marketplace with database-enforced access controls and platform-controlled provider verification.
-
-## Implemented foundation
+## What is implemented
 
 - Customer and service-provider sign-up/sign-in using Supabase Auth.
 - Provider onboarding with business profile, service area, experience, and request preferences.
@@ -29,8 +22,8 @@
 - **Application:** Next.js App Router, React, TypeScript
 - **Styling:** Tailwind CSS
 - **Database and authentication:** Supabase PostgreSQL and Supabase Auth
-- **Hosting target:** Netlify (deploy previews and production deployment)
-- **Quality:** ESLint, TypeScript checks, Vitest, GitHub Actions
+- **Hosting and preview:** Railway
+- **Quality:** ESLint, TypeScript, Vitest, GitHub Actions
 
 ## Repository layout
 
@@ -40,7 +33,6 @@
 - `supabase/migrations/` — versioned database schema and security changes
 - `docs/` — setup and development notes
 - `.github/workflows/quality.yml` — automated quality checks
-- `netlify.toml` — Netlify build configuration
 
 ## Run locally
 
@@ -73,7 +65,7 @@ The project currently has public Supabase configuration defaults for the dedicat
 
 Tracked SQL migrations are in `supabase/migrations/`. They create profiles, service categories, provider profiles, service listings, service requests, and service quotes with Row Level Security and restricted status transitions.
 
-The deployed app's origin must be added to the Supabase Auth Site URL and allowed redirect URLs. Use the Netlify production URL and any required deploy-preview URL patterns. Do not use a service-role key in client-side code.
+Add the Railway deployment URL and any preview URL used for testing to the Supabase Auth Site URL / allowed redirect URLs as appropriate. Keep service-role credentials out of client-side code.
 
 ## Current limitations
 
@@ -81,4 +73,4 @@ Admin verification UI, booking lifecycle, in-app messaging, payment processing, 
 
 ## Development and deployment
 
-Changes are reviewed through GitHub pull requests. GitHub Actions runs dependency security checks, linting, TypeScript, unit tests, and the production build. Netlify should be connected to this repository so pull requests can receive deploy previews and the production branch can publish the live site after checks pass.
+The Railway preview service is intended to deploy the active implementation branch for review. The production service should track the stable `main` branch after changes are reviewed and merged. GitHub Actions runs dependency security checks, linting, TypeScript, tests, and the production build; verify all checks before promoting a build to production.
