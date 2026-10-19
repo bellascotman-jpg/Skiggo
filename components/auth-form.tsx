@@ -45,8 +45,8 @@ export default function AuthForm({ mode, initialAccountType = "customer" }: Auth
         });
         if (signUpError) throw signUpError;
         if (data.session) {
-          setMessage("Your account is ready. Taking you back to Skiggo…");
-          router.push("/");
+          setMessage("Your account is ready. Taking you to the next step…");
+          router.push(accountType === "provider" ? "/provider/onboarding" : "/");
           router.refresh();
         } else {
           setMessage("Account request received. Check your email for the confirmation link, then sign in.");
@@ -54,8 +54,12 @@ export default function AuthForm({ mode, initialAccountType = "customer" }: Auth
       } else {
         const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
         if (signInError) throw signInError;
-        setMessage("You’re signed in. Taking you back to Skiggo…");
-        router.push("/");
+        const { data: userData } = await supabase.auth.getUser();
+        const { data: profile } = userData.user
+          ? await supabase.from("profiles").select("account_type").eq("id", userData.user.id).maybeSingle()
+          : { data: null };
+        setMessage("You’re signed in. Taking you to your Skiggo workspace…");
+        router.push(profile?.account_type === "provider" ? "/provider/onboarding" : "/");
         router.refresh();
       }
     } catch (caught) {
