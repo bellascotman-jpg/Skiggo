@@ -37,3 +37,42 @@ export const serviceCategories: ServiceCategory[] = [
   { slug: "repairs-maintenance", name: "Repairs & maintenance", description: "Repair and maintain appliances, equipment and property.", examples: ["Appliance repair", "AC servicing", "Painting"], icon: Wrench },
   { slug: "safety-specialist", name: "Safety & specialist services", description: "Specialist help where skills and trust matter.", examples: ["Safety inspections", "Technical support", "Specialist trades"], icon: ShieldCheck },
 ];
+
+type DatabaseCategory = {
+  slug: string;
+  name: string;
+  description: string;
+  examples: string[] | null;
+};
+
+const fallbackBySlug = new Map(serviceCategories.map((category) => [category.slug, category]));
+
+export async function getServiceCategories(): Promise<ServiceCategory[]> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  if (!url || !key) return serviceCategories;
+
+  try {
+    const response = await fetch(
+      `${url}/rest/v1/service_categories?select=slug,name,description,examples&is_active=eq.true&order=sort_order.asc`,
+      {
+        headers: { apikey: key, Authorization: `Bearer ${key}` },
+        next: { revalidate: 60 },
+      },
+    );
+    if (!response.ok) return serviceCategories;
+
+    const rows = (await response.json()) as DatabaseCategory[];
+    if (!Array.isArray(rows) || rows.length === 0) return serviceCategories;
+
+    return rows.map((row) => ({
+      slug: row.slug,
+      name: row.name,
+      description: row.description,
+      examples: Array.isArray(row.examples) ? row.examples : [],
+      icon: fallbackBySlug.get(row.slug)?.icon ?? Sparkles,
+    }));
+  } catch {
+    return serviceCategories;
+  }
+}
