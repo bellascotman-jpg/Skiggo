@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, MapPin, Search, Sparkles } from "lucide-react";
-import { serviceCategories } from "@/lib/service-categories";
+import { getServiceCategories } from "@/lib/service-categories";
 
 export const metadata: Metadata = {
   title: "Explore services",
@@ -14,6 +14,7 @@ type ServicesPageProps = {
 
 export default async function ServicesPage({ searchParams }: ServicesPageProps) {
   const params = await searchParams;
+  const categories = await getServiceCategories();
   const query = params.q?.trim() ?? "";
   const location = params.location?.trim() ?? "";
   const normalizedQuery = query.toLocaleLowerCase();
@@ -24,7 +25,7 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
           .toLocaleLowerCase()
           .includes(normalizedQuery),
       )
-    : serviceCategories;
+    : categories;
 
   return (
     <main>
