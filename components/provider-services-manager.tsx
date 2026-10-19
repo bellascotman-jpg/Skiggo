@@ -80,6 +80,8 @@ export default function ProviderServicesManager() {
   }
 
   useEffect(() => {
+    // This effect starts an async Supabase fetch; state updates occur after the request resolves.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void loadData();
     // loadData is deliberately run once on mount; refresh is called after mutations.
     // eslint-disable-next-line react-hooks/exhaustive-deps
