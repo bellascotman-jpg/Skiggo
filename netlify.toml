@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Netlify uses its maintained Next.js adapter for SSR, route handlers and App Router.
+# Do not add a static SPA catch-all; it can break Next.js server routes.
