@@ -201,5 +201,11 @@ create policy quotes_customer_decide_pending on public.service_quotes for update
 revoke delete,update on public.service_quotes from anon,authenticated;
 grant update(status) on public.service_quotes to authenticated;
 
--- Remove accidental direct API execution on an existing SECURITY DEFINER helper; its event trigger remains registered.
-revoke execute on function public.rls_auto_enable() from public,anon,authenticated;
+-- If this project has the optional helper, remove direct API execution while leaving its event trigger registered.
+do $block$
+begin
+  if to_regprocedure('public.rls_auto_enable()') is not null then
+    execute 'revoke execute on function public.rls_auto_enable() from public, anon, authenticated';
+  end if;
+end;
+$block$;
