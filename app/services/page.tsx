@@ -21,7 +21,7 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
   const listings = await getPublishedServiceListings(query, location);
   const normalizedQuery = query.toLocaleLowerCase();
   const matchingCategories = normalizedQuery
-    ? serviceCategories.filter((category) =>
+    ? categories.filter((category) =>
         [category.name, category.description, ...category.examples]
           .join(" ")
           .toLocaleLowerCase()
