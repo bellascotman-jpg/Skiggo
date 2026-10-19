@@ -28,6 +28,10 @@ jobs:
         run: |
           npm audit --omit=dev --json > /tmp/npm-audit.json || true
           node -e "const a=require('/tmp/npm-audit.json'); console.log('Production dependency vulnerabilities:', JSON.stringify(a.metadata?.vulnerabilities ?? {})); console.log(JSON.stringify(Object.entries(a.vulnerabilities ?? {}).map(([name, v]) => ({name, severity:v.severity, range:v.range, fixAvailable:v.fixAvailable})), null, 2))"
+      - name: Audit all dependencies
+        run: |
+          npm audit --json > /tmp/npm-audit-all.json || true
+          node -e "const a=require('/tmp/npm-audit-all.json'); console.log('All dependency vulnerabilities:', JSON.stringify(a.metadata?.vulnerabilities ?? {})); console.log(JSON.stringify(Object.entries(a.vulnerabilities ?? {}).map(([name, v]) => ({name, severity:v.severity, range:v.range, fixAvailable:v.fixAvailable})), null, 2))"
       - name: Lint
         run: npm run lint
       - name: TypeScript
