@@ -1,19 +1,13 @@
 import { createBrowserClient } from "@supabase/ssr";
+import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from "@/lib/supabase/config";
 
 export function isSupabaseConfigured() {
-  return Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
-  );
+  return Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
 }
 
 export function createSupabaseBrowserClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-
-  if (!url || !key) {
+  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
     throw new Error("Supabase is not configured. Add the public project URL and publishable key to the deployment environment.");
   }
-
-  return createBrowserClient(url, key);
+  return createBrowserClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 }
