@@ -86,6 +86,8 @@ export default function ProviderRequestsBoard() {
   }
 
   useEffect(() => {
+    // This effect starts an async Supabase fetch; state updates occur after the request resolves.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void loadBoard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [configured, router]);
