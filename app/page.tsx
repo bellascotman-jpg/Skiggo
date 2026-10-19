@@ -21,7 +21,7 @@ export default function HomePage() {
     <header style={{ borderBottom: "1px solid var(--line)", background: "#ffffffed" }}>
       <div className="container" style={{ minHeight: 76, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 20 }}>
         <Link href="/" aria-label="Skiggo home" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontWeight: 900, fontSize: 25, letterSpacing: "-1.2px" }}><span style={{ display: "grid", placeItems: "center", width: 36, height: 36, background: "var(--brand)", color: "white", borderRadius: 11, fontSize: 20 }}>S</span>skiggo<span style={{ color: "var(--brand)", fontSize: 11, letterSpacing: 0, alignSelf: "end", marginBottom: 4 }}>GET IT DONE.</span></Link>
-        <nav aria-label="Main navigation" style={{ display: "flex", alignItems: "center", gap: 24, fontSize: 14 }} className="hidden md:flex"><Link href="#services">Explore services</Link><Link href="#how-it-works">How it works</Link><Link href="#professionals">For professionals</Link></nav>
+        <nav aria-label="Main navigation" style={{ display: "flex", alignItems: "center", gap: 24, fontSize: 14 }} className="hidden md:flex"><Link href="/services">Explore services</Link><Link href="/requests/new">Post a request</Link><Link href="#how-it-works">How it works</Link><Link href="#professionals">For professionals</Link></nav>
         <div style={{ display: "flex", gap: 9, alignItems: "center" }}><Link href="/auth/sign-in" className="btn btn-outline" style={{ minHeight: 40, paddingInline: 14 }}>Sign in</Link><Link href="/auth/sign-up" className="btn btn-primary" style={{ minHeight: 40, paddingInline: 14 }}>Get started <ArrowRight size={16}/></Link></div>
       </div>
     </header>
